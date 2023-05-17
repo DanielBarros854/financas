@@ -1,4 +1,6 @@
 import { type User } from '@prisma/client'
+import { type UserWhereInput } from '../../../prisma/generated/type-graphql'
+
 import { prismaClient } from '../prisma'
 
 export class UserRepository {
@@ -11,6 +13,18 @@ export class UserRepository {
       })
 
       return user
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  async getAll (where?: UserWhereInput): Promise<User[]> {
+    try {
+      const users = await prismaClient.user.findMany({
+        where
+      })
+
+      return users
     } catch (error) {
       throw new Error(error)
     }

@@ -12,7 +12,10 @@ const bootstrap = async (): Promise<void> => {
 
   const schema = await buildSchema({
     resolvers: [join(__dirname, '/../resolvers/*Resolver.{ts,js}')],
-    container: Container
+    container: Container,
+    validate: {
+      forbidUnknownValues: false
+    }
   })
 
   const context = {
