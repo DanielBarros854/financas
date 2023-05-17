@@ -1,16 +1,19 @@
-import { User } from "@prisma/client";
-import { UserRepository } from "../db/repositories";
+import { type User } from '@prisma/client'
+import { Service } from 'typedi'
 
+import { UserRepository } from '../db/repositories'
+
+@Service()
 export class UserService {
-  constructor(private userRepository: UserRepository = new UserRepository) { }
+  constructor (private readonly userRepository: UserRepository) { }
 
-  public user = async (id: number): Promise<User> => {
-    const _user = await this.userRepository.getById(id);
+  async getById (id: number): Promise<User> {
+    const user = await this.userRepository.getById(id)
 
-    if (!_user) {
-      throw new Error("User not found");
+    if (!user) {
+      throw new Error('User not found')
     }
 
-    return _user
+    return user
   }
 }

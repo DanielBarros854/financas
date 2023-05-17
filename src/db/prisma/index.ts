@@ -1,3 +1,3 @@
-import { PrismaClient } from '.prisma/client';
+import { PrismaClient } from '.prisma/client'
 
-export const prisma_client = new PrismaClient({ errorFormat: 'minimal' });
+export const prismaClient = new PrismaClient({ errorFormat: 'minimal' })

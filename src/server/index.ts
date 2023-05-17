@@ -1,20 +1,30 @@
 import 'reflect-metadata'
+import '../../typedi.config'
 import { buildSchema } from 'type-graphql'
 import { ApolloServer } from 'apollo-server'
-import { prisma_client } from '../db/prisma'
+import { join } from 'path'
+import Container from 'typedi'
 
-const app = async () => {
+import { prismaClient } from '../db/prisma'
+
+const bootstrap = async (): Promise<void> => {
+  Container.set('container', Container)
+
   const schema = await buildSchema({
-    resolvers: [`${__dirname}/../resolvers/*Resolver.{ts,js}`]
+    resolvers: [join(__dirname, '/../resolvers/*Resolver.{ts,js}')],
+    container: Container
   })
 
   const context = {
-    prisma: prisma_client,
+    prisma: prismaClient
   }
 
-  new ApolloServer({ schema, context }).listen({ port: 4000 }, () =>
-    console.log('🚀 Server ready at: <http://localhost:4000>')
+  const port = process.env.PORT ?? 4000
+
+  void new ApolloServer(
+    { schema, context }).listen({ port },
+    () => { console.log(`🚀 Server ready at: <http://localhost:${port}>`) }
   )
 }
 
-app()
+void bootstrap()

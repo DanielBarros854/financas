@@ -1,22 +1,22 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class UserSchema {
   @Field()
-  id: number;
+    id: number
 
   @Field()
-  email: string;
+    email: string
 
   @Field()
-  cpf: string;
+    cpf: string
 
   @Field()
-  name: string;
+    name: string
 
   @Field()
-  created_at: Date;
+    created_at: Date
 
   @Field()
-  updated_at: Date;
+    updated_at: Date
 }
