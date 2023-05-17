@@ -3,12 +3,16 @@ import { prismaClient } from '../prisma'
 
 export class UserRepository {
   async getById (id: number): Promise<User | null> {
-    const user = await prismaClient.user.findUnique({
-      where: {
-        id
-      }
-    })
+    try {
+      const user = await prismaClient.user.findUnique({
+        where: {
+          id
+        }
+      })
 
-    return user
+      return user
+    } catch (error) {
+      throw new Error(error)
+    }
   }
 }
