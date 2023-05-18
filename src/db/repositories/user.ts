@@ -1,15 +1,13 @@
 import { type User } from '@prisma/client'
-import { type UserWhereInput } from '../../../prisma/generated/type-graphql'
+import { type UserWhereUniqueInput, type UserWhereInput } from '../../../prisma/generated/type-graphql'
 
 import { prismaClient } from '../prisma'
 
 export class UserRepository {
-  async getById (id: number): Promise<User | null> {
+  async getUnique (where: UserWhereUniqueInput): Promise<User | null> {
     try {
       const user = await prismaClient.user.findUnique({
-        where: {
-          id
-        }
+        where
       })
 
       return user
@@ -25,6 +23,18 @@ export class UserRepository {
       })
 
       return users
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  async create (input: any): Promise<User> {
+    try {
+      const newUser = await prismaClient.user.create({
+        data: input
+      })
+
+      return newUser
     } catch (error) {
       throw new Error(error)
     }

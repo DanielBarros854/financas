@@ -1,6 +1,6 @@
 import { type User } from '@prisma/client'
 import { Service } from 'typedi'
-import { type UserWhereInput } from '../../prisma/generated/type-graphql'
+import { type UserWhereUniqueInput, type UserWhereInput } from '../../prisma/generated/type-graphql'
 
 import { UserRepository } from '../db/repositories'
 
@@ -8,8 +8,8 @@ import { UserRepository } from '../db/repositories'
 export class UserService {
   constructor (private readonly userRepository: UserRepository) { }
 
-  async getById (id: number): Promise<User> {
-    const user = await this.userRepository.getById(id)
+  async getUnique (where: UserWhereUniqueInput): Promise<User> {
+    const user = await this.userRepository.getUnique(where)
 
     if (!user) {
       throw new Error('User not found')
