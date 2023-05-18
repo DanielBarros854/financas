@@ -3,6 +3,7 @@ import { Service } from 'typedi'
 import { type UserWhereUniqueInput, type UserWhereInput } from '../../prisma/generated/type-graphql'
 
 import { UserRepository } from '../db/repositories'
+import { type UserInputInterface } from '../inputs'
 
 @Service()
 export class UserService {
@@ -22,5 +23,11 @@ export class UserService {
     const users = await this.userRepository.getAll(where)
 
     return users
+  }
+
+  async create (input: UserInputInterface): Promise<User> {
+    const newUser = await this.userRepository.create(input)
+
+    return newUser
   }
 }

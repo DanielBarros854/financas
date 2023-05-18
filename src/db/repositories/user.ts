@@ -2,6 +2,7 @@ import { type User } from '@prisma/client'
 import { type UserWhereUniqueInput, type UserWhereInput } from '../../../prisma/generated/type-graphql'
 
 import { prismaClient } from '../prisma'
+import { type UserInputInterface } from '../../inputs'
 
 export class UserRepository {
   async getUnique (where: UserWhereUniqueInput): Promise<User | null> {
@@ -28,7 +29,7 @@ export class UserRepository {
     }
   }
 
-  async create (input: any): Promise<User> {
+  async create (input: UserInputInterface): Promise<User> {
     try {
       const newUser = await prismaClient.user.create({
         data: input
