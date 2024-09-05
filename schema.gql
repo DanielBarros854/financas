@@ -22,14 +22,27 @@ type Removed {
   removed: Boolean!
 }
 
+type InvestmentType {
+  id: ID!
+  name: String!
+  share_value: Float!
+  amount: Int!
+  purchase_date: DateTime!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
 type Query {
   expenses: [ExpenseType!]!
+  investments: [InvestmentType!]!
 }
 
 type Mutation {
   expenseAdd(fields: ExpenseInput!): ExpenseType!
   expenseUpdate(id: Int!, fields: ExpenseUpdateInput!): ExpenseType!
   expenseRemove(id: Int!): Removed!
+  investmentAdd(fields: InvestmentInput!): InvestmentType!
+  investmentRemove(id: Int!): Removed!
 }
 
 input ExpenseInput {
@@ -46,4 +59,11 @@ input ExpenseUpdateInput {
   automatic_billing: Boolean
   collection_day: DateTime
   essential: Boolean
+}
+
+input InvestmentInput {
+  name: String!
+  share_value: Float!
+  amount: Int!
+  purchase_date: DateTime!
 }

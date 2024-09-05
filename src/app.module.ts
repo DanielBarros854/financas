@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { PrismaService } from './prisma/prisma.service';
 import { ExpenseModule } from './expense/expense.module';
+import { InvestmentModule } from './investiment/investment.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { ExpenseModule } from './expense/expense.module';
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
     }),
     ExpenseModule,
+    InvestmentModule,
   ],
   providers: [PrismaService],
 })
