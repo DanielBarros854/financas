@@ -64,7 +64,7 @@ export class ExpenseService {
       }
 
       return { removed: 0 };
-    } catch (error: any) {
+    } catch {
       return { removed: 0 };
     }
   }
