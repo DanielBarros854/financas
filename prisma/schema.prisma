@@ -13,33 +13,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model expenses {
+model Expense {
   id                Int      @id @default(autoincrement())
   name              String
   cost              Float
   automatic_billing Boolean
   collection_day    DateTime
   essential         Boolean
+
   updated_at        DateTime @default(now()) @updatedAt
   created_at        DateTime @default(now())
+
+  @@map("expenses")
 }
 
-model investment {
+model Investment {
   id            Int      @id @default(autoincrement())
   name          String
   amount        Int
   share_value   Float
   purchase_date DateTime
+
   updated_at    DateTime @default(now()) @updatedAt
   created_at    DateTime @default(now())
+
+  @@map("investments")
 }
 
-model earnings {
+model Earning {
   id           Int      @id @default(autoincrement())
   name         String
   amount       Int
   earning      Float
   earning_date DateTime
+
   updated_at   DateTime @default(now()) @updatedAt
   created_at   DateTime @default(now())
+
+  @@map("earnings")
 }
