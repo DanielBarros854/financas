@@ -13,9 +13,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id         Int      @id @default(autoincrement())
-  name       String
-  updated_at DateTime @default(now()) @updatedAt
-  created_at DateTime @default(now())
+model expenses {
+  id                Int      @id @default(autoincrement())
+  name              String
+  cost              Float
+  automatic_billing Boolean
+  collection_day    DateTime
+  essential         Boolean
+  updated_at        DateTime @default(now()) @updatedAt
+  created_at        DateTime @default(now())
+}
+
+model investment {
+  id            Int      @id @default(autoincrement())
+  name          String
+  amount        Int
+  share_value   Float
+  purchase_date DateTime
+  updated_at    DateTime @default(now()) @updatedAt
+  created_at    DateTime @default(now())
+}
+
+model earnings {
+  id           Int      @id @default(autoincrement())
+  name         String
+  amount       Int
+  earning      Float
+  earning_date DateTime
+  updated_at   DateTime @default(now()) @updatedAt
+  created_at   DateTime @default(now())
 }
