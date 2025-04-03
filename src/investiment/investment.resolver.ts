@@ -21,9 +21,7 @@ export class InvestmentResolver {
   }
 
   @Mutation(() => Removed)
-  async investmentRemove(
-    @Args('id', Int) id: number,
-  ): Promise<{ removed: number }> {
+  async investmentRemove(@Args('id', Int) id: number): Promise<Removed> {
     return this.investmentService.investmentRemove(id);
   }
 }

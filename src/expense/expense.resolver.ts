@@ -27,9 +27,7 @@ export class ExpenseResolver {
   }
 
   @Mutation(() => Removed)
-  async expenseRemove(
-    @Args('id', Int) id: number,
-  ): Promise<{ removed: number }> {
+  async expenseRemove(@Args('id', Int) id: number): Promise<Removed> {
     return this.expenseService.expenseRemove(id);
   }
 }

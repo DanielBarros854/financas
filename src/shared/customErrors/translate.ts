@@ -1,6 +1,7 @@
 const app_nomenclatures = {
   user: 'usuário',
-  permission: 'permissão',
+  investment: 'Investimento',
+  expense: 'Gasto',
 };
 
 const captalizeFirstLetterHelper = (text: any) =>

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { InvestmentInput, InvestmentType } from './investment.model';
 import { customErrorHandler } from 'src/shared/customErrors';
+import { Removed } from 'src/shared/types/removed';
 
 @Injectable()
 export class InvestmentService {
@@ -33,7 +34,7 @@ export class InvestmentService {
     }
   }
 
-  async investmentRemove(id: number): Promise<{ removed: number }> {
+  async investmentRemove(id: number): Promise<Removed> {
     try {
       const investment = await this.ormService.investment.delete({
         where: {
@@ -42,12 +43,12 @@ export class InvestmentService {
       });
 
       if (investment) {
-        return { removed: 1 };
+        return { removed: true };
       }
 
-      return { removed: 0 };
-    } catch {
-      return { removed: 0 };
+      return { removed: false };
+    } catch (error: any) {
+      throw customErrorHandler(error);
     }
   }
 }

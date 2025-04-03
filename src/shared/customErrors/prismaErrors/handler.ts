@@ -14,6 +14,10 @@ interface ForeignKeyError {
 
 interface RecordNotFoundError {
   modelName: string;
+  meta?: {
+    cause: string;
+    modelName: string;
+  };
 }
 
 export const prismaHandlerError = (error: PrismaClientKnownRequestError) => {
@@ -41,10 +45,11 @@ export const prismaHandlerError = (error: PrismaClientKnownRequestError) => {
       return new Error(`${formated_foreign_key} não existe.`);
 
     case PrismaErrorCode.record_not_found:
-      const record_not_found_error =
-        error.meta as unknown as RecordNotFoundError;
+      const { modelName, meta } = error as unknown as RecordNotFoundError;
 
-      const record_key = record_not_found_error.modelName.toLowerCase();
+      const record_key = meta
+        ? meta.modelName.toLowerCase()
+        : modelName.split(' ')[1].toLowerCase();
 
       const formated_record_key_key =
         translate(record_key).captalize_first_letter;
