@@ -6,7 +6,7 @@ import { Removed } from 'src/shared/types/removed';
 
 @Injectable()
 export class InvestmentService {
-  constructor(private ormService: PrismaService) {}
+  constructor(private readonly ormService: PrismaService) {}
 
   async investmentAdd(fields: InvestmentInput): Promise<InvestmentType> {
     try {
