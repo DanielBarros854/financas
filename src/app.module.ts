@@ -5,6 +5,8 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { PrismaService } from './prisma/prisma.service';
 import { ExpenseModule } from './expense/expense.module';
 import { InvestmentModule } from './investiment/investment.module';
+import { UserModule } from './user/user.module';
+import { CryptoModule } from './crypto/crypto.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { InvestmentModule } from './investiment/investment.module';
     }),
     ExpenseModule,
     InvestmentModule,
+    UserModule,
+    CryptoModule,
   ],
   providers: [PrismaService],
 })
