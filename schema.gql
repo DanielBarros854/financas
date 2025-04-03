@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type ExpenseType {
-  id: ID!
+  id: Int!
   name: String!
   cost: Float!
   automatic_billing: Boolean!
@@ -23,7 +23,7 @@ type Removed {
 }
 
 type InvestmentType {
-  id: ID!
+  id: Int!
   name: String!
   share_value: Float!
   amount: Int!
@@ -32,9 +32,18 @@ type InvestmentType {
   updated_at: DateTime!
 }
 
+type UserType {
+  id: Int!
+  name: String!
+  email: String!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
 type Query {
   expenses: [ExpenseType!]!
   investments: [InvestmentType!]!
+  users: [UserType!]!
 }
 
 type Mutation {
@@ -43,6 +52,9 @@ type Mutation {
   expenseRemove(id: Int!): Removed!
   investmentAdd(fields: InvestmentInput!): InvestmentType!
   investmentRemove(id: Int!): Removed!
+  userAdd(fields: UserInput!): UserType!
+  userUpdate(id: Int!, fields: UserUpdateInput!): UserType!
+  userRemove(id: Int!): Removed!
 }
 
 input ExpenseInput {
@@ -66,4 +78,14 @@ input InvestmentInput {
   share_value: Float!
   amount: Int!
   purchase_date: DateTime!
+}
+
+input UserInput {
+  name: String!
+  email: String!
+  password: String!
+}
+
+input UserUpdateInput {
+  name: String
 }
