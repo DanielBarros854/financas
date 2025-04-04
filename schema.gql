@@ -44,10 +44,20 @@ type AuthType {
   token: String!
 }
 
+type EarningType {
+  id: Int!
+  name: String!
+  value: Float!
+  date: DateTime!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
 type Query {
   expenses: [ExpenseType!]!
   investments: [InvestmentType!]!
   users: [UserType!]!
+  earnings: [EarningType!]!
 }
 
 type Mutation {
@@ -60,6 +70,9 @@ type Mutation {
   userUpdate(id: Int!, fields: UserUpdateInput!): UserType!
   userRemove(id: Int!): Removed!
   login(fields: AuthInput!): AuthType!
+  earningAdd(fields: EarningInput!): EarningType!
+  earningUpdate(id: Int!, fields: EarningUpdateInput!): EarningType!
+  earningRemove(id: Int!): Removed!
 }
 
 input ExpenseInput {
@@ -98,4 +111,16 @@ input UserUpdateInput {
 input AuthInput {
   email: String!
   password: String!
+}
+
+input EarningInput {
+  name: String!
+  value: Float!
+  date: DateTime!
+}
+
+input EarningUpdateInput {
+  name: String
+  value: Float
+  date: DateTime
 }

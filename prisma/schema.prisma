@@ -58,11 +58,10 @@ model Investment {
 }
 
 model Earning {
-  id           Int      @id @default(autoincrement())
-  name         String
-  amount       Int
-  earning      Float
-  earning_date DateTime
+  id     Int      @id @default(autoincrement())
+  name   String
+  value  Float
+  date   DateTime
 
   user    User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   user_id Int
