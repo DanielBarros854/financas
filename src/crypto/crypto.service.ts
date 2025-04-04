@@ -9,9 +9,7 @@ export class CryptoService {
     return bcrypt.hash(data, this.saltRounds);
   }
 
-  async compare(data: string): Promise<boolean> {
-    const hash = process.env.CRYPT_KEY;
-
+  async compare(data: string, hash: string): Promise<boolean> {
     return bcrypt.compare(data, hash);
   }
 }

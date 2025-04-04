@@ -14,6 +14,10 @@ model User {
   /// @TypeGraphQL.omit(output: true, input: true)
   password String
 
+  expenses    Expense[]
+  investments Investment[]
+  earnings    Earning[]
+
   updated_at DateTime @default(now()) @updatedAt
   created_at DateTime @default(now())
 
@@ -28,6 +32,9 @@ model Expense {
   collection_day    DateTime
   essential         Boolean
 
+  user    User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user_id Int
+
   updated_at DateTime @default(now()) @updatedAt
   created_at DateTime @default(now())
 
@@ -41,6 +48,9 @@ model Investment {
   share_value   Float
   purchase_date DateTime
 
+  user    User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user_id Int
+
   updated_at DateTime @default(now()) @updatedAt
   created_at DateTime @default(now())
 
@@ -53,6 +63,9 @@ model Earning {
   amount       Int
   earning      Float
   earning_date DateTime
+
+  user    User @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user_id Int
 
   updated_at DateTime @default(now()) @updatedAt
   created_at DateTime @default(now())

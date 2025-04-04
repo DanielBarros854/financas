@@ -7,6 +7,7 @@ import { ExpenseModule } from './expense/expense.module';
 import { InvestmentModule } from './investiment/investment.module';
 import { UserModule } from './user/user.module';
 import { CryptoModule } from './crypto/crypto.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CryptoModule } from './crypto/crypto.module';
     InvestmentModule,
     UserModule,
     CryptoModule,
+    AuthModule,
   ],
   providers: [PrismaService],
 })

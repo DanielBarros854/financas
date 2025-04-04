@@ -40,6 +40,10 @@ type UserType {
   updated_at: DateTime!
 }
 
+type AuthType {
+  token: String!
+}
+
 type Query {
   expenses: [ExpenseType!]!
   investments: [InvestmentType!]!
@@ -55,6 +59,7 @@ type Mutation {
   userAdd(fields: UserInput!): UserType!
   userUpdate(id: Int!, fields: UserUpdateInput!): UserType!
   userRemove(id: Int!): Removed!
+  login(fields: AuthInput!): AuthType!
 }
 
 input ExpenseInput {
@@ -88,4 +93,9 @@ input UserInput {
 
 input UserUpdateInput {
   name: String
+}
+
+input AuthInput {
+  email: String!
+  password: String!
 }

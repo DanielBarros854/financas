@@ -3,15 +3,22 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { ExpenseInput, ExpenseType, ExpenseUpdateInput } from './expense.model';
 import { customErrorHandler } from 'src/shared/customErrors';
 import { Removed } from 'src/shared/types/removed';
+import { LoggedUserType } from 'src/auth/auth.model';
 
 @Injectable()
 export class ExpenseService {
   constructor(private readonly ormService: PrismaService) {}
 
-  async expenseAdd(fields: ExpenseInput): Promise<ExpenseType> {
+  async expenseAdd(
+    fields: ExpenseInput,
+    logged_user: LoggedUserType,
+  ): Promise<ExpenseType> {
     try {
       const new_expense = await this.ormService.expense.create({
-        data: fields,
+        data: {
+          ...fields,
+          user_id: logged_user.id,
+        },
       });
 
       return new_expense;
@@ -20,7 +27,7 @@ export class ExpenseService {
     }
   }
 
-  async expenses(id?: number): Promise<ExpenseType[]> {
+  async expenses(id: number): Promise<ExpenseType[]> {
     try {
       const expenses_data = await this.ormService.expense.findMany({
         where: {
