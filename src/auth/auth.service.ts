@@ -24,7 +24,7 @@ export class AuthService {
       });
 
       if (!user) {
-        throw new UnauthorizedException('Invalid credentials');
+        throw new UnauthorizedException('Credenciais inválidas');
       }
 
       const is_correct_password = await this.cryptoService.compare(
@@ -33,7 +33,7 @@ export class AuthService {
       );
 
       if (!is_correct_password) {
-        throw new UnauthorizedException('Invalid credentials');
+        throw new UnauthorizedException('Credenciais inválidas');
       }
 
       const payload = { id: user.id, email: user.email };
