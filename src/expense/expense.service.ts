@@ -27,11 +27,11 @@ export class ExpenseService {
     }
   }
 
-  async expenses(id: number): Promise<ExpenseType[]> {
+  async expenses(user_id: number): Promise<ExpenseType[]> {
     try {
       const expenses_data = await this.ormService.expense.findMany({
         where: {
-          id,
+          user_id,
         },
       });
 

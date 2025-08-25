@@ -13,8 +13,8 @@ export class InvestmentResolver {
 
   @UseGuards(AuthGuard)
   @Query(() => [InvestmentType])
-  async investments(): Promise<InvestmentType[]> {
-    return this.investmentService.investments();
+  async investments(@Context('req') req: Request): Promise<InvestmentType[]> {
+    return this.investmentService.investments(req.user.id);
   }
 
   @UseGuards(AuthGuard)

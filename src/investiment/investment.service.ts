@@ -27,11 +27,11 @@ export class InvestmentService {
     }
   }
 
-  async investments(id?: number): Promise<InvestmentType[]> {
+  async investments(user_id: number): Promise<InvestmentType[]> {
     try {
       const investments_data = await this.ormService.investment.findMany({
         where: {
-          id,
+          user_id,
         },
       });
 
