@@ -27,11 +27,11 @@ export class EarningService {
     }
   }
 
-  async earnings(id: number): Promise<EarningType[]> {
+  async earnings(user_id: number): Promise<EarningType[]> {
     try {
       const earnings_data = await this.ormService.earning.findMany({
         where: {
-          id,
+          user_id,
         },
       });
 
